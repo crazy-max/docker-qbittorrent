@@ -17,7 +17,7 @@ jobs:
           echo ::set-output name=build_tag::test
           echo ::set-output name=container_name::qbittorrent
           echo ::set-output name=running_timeout::120
-          echo ::set-output name=running_log_check::qBittorrent is successfully listening on
+          echo ::set-output name=running_log_check::access the Web UI at
       -
         # https://github.com/actions/checkout
         name: Checkout
@@ -61,4 +61,3 @@ jobs:
             exit 1
           fi
           docker rm -f ${{ steps.prepare.outputs.container_name }} > /dev/null 2>&1 || true
-          echo
