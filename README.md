@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/crazy-max/docker-qbittorrent" target="_blank"><img height="128"src="https://raw.githubusercontent.com/crazy-max/docker-qbittorrent/master/.res/docker-qbittorrent.jpg"></a></p>
+<p align="center"><a href="https://github.com/crazy-max/docker-qbittorrent" target="_blank"><img height="128" src=".res/docker-qbittorrent.jpg"></a></p>
 
 <p align="center">
   <a href="https://hub.docker.com/r/crazymax/qbittorrent/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/crazy-max/docker-qbittorrent?label=version&style=flat-square" alt="Latest Version"></a>
@@ -118,7 +118,9 @@ v4.1.8
 You can change the default username `admin` and password `adminadmin` through the API or WebUI.
 
 ```
-$ docker-compose exec qbittorrent curl --fail -X POST -d 'json={"web_ui_username":"myuser","web_ui_password":"mypassword"}' http://127.0.0.1:8080/api/v2/app/setPreferences
+$ docker-compose exec qbittorrent curl --fail -X POST \
+  -d 'json={"web_ui_username":"myuser","web_ui_password":"mypassword"}' \
+  http://127.0.0.1:8080/api/v2/app/setPreferences
 ```
 
 ## How can I help ?
