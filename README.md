@@ -5,7 +5,7 @@
   <a href="https://github.com/crazy-max/docker-qbittorrent/actions?workflow=build"><img src="https://github.com/crazy-max/docker-qbittorrent/workflows/build/badge.svg" alt="Build Status"></a>
   <a href="https://hub.docker.com/r/crazymax/qbittorrent/"><img src="https://img.shields.io/docker/stars/crazymax/qbittorrent.svg?style=flat-square" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/qbittorrent/"><img src="https://img.shields.io/docker/pulls/crazymax/qbittorrent.svg?style=flat-square" alt="Docker Pulls"></a>
-  <a href="https://www.codacy.com/app/crazy-max/docker-qbittorrent"><img src="https://img.shields.io/codacy/grade/c584240706dc4cc48bd7ebdcd42d7641.svg?style=flat-square" alt="Code Quality"></a>
+  <a href="https://www.codacy.com/app/crazy-max/docker-qbittorrent"><img src="https://img.shields.io/codacy/grade/4fe3d474010444e8a7c17904e472704f.svg?style=flat-square" alt="Code Quality"></a>
   <br /><a href="https://www.patreon.com/crazymax"><img src="https://img.shields.io/badge/donate-patreon-f96854.svg?logo=patreon&style=flat-square" alt="Support me on Patreon"></a>
   <a href="https://www.paypal.me/crazyws"><img src="https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square" alt="Donate Paypal"></a>
 </p>
