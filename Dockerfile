@@ -1,13 +1,8 @@
-# syntax=docker/dockerfile:experimental
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.10 as builder
+FROM alpine:3.10 as builder
 
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
-
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
-RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
 
 RUN apk add --update --no-cache \
     autoconf \
@@ -59,7 +54,7 @@ RUN cd /tmp \
   && ls -al /usr/local/bin/ \
   && qbittorrent-nox --help
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.10
+FROM alpine:3.10
 
 ARG BUILD_DATE
 ARG VCS_REF
