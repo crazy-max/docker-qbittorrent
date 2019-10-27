@@ -2,14 +2,18 @@ name: test
 
 on:
   pull_request:
-    branches: master
+    branches: 'master'
   push:
-    branches: master
+    branches: 'master'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      -
+        # https://github.com/actions/checkout
+        name: Checkout
+        uses: actions/checkout@v1
       -
         name: Prepare
         id: prepare
@@ -19,23 +23,12 @@ jobs:
           echo ::set-output name=running_timeout::120
           echo ::set-output name=running_log_check::access the Web UI at
       -
-        # https://github.com/actions/checkout
-        name: Checkout
-        uses: actions/checkout@v1
-      -
-        # https://github.com/crazy-max/ghaction-docker-buildx
-        name: Set up Docker Buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
-      -
-        name: Docker Buildx
+        name: Docker Build
         run: |
-          docker buildx build --load --tag ${{ steps.prepare.outputs.build_tag }} --file Dockerfile .
+          docker build --tag ${{ steps.prepare.outputs.build_tag }} --file ${{ matrix.docker_file }} Dockerfile .
       -
         name: Start container
         run: |
-          docker rm -f ${{ steps.prepare.outputs.container_name }} > /dev/null 2>&1 || true
           docker run -d --name ${{ steps.prepare.outputs.container_name }} ${{ steps.prepare.outputs.build_tag }}
       -
         name: Test run

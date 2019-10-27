@@ -20,7 +20,6 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 ## Features
 
 * Run as non-root user
-* Multi-platform image
 * Latest [qBittorrent](https://github.com/qbittorrent/qBittorrent) / [libtorrent-rasterbar](https://github.com/arvidn/libtorrent) release compiled from source
 * WAN IP address automatically resolved for reporting to the tracker
 * Finished torrents automatically saved to `/data/torrents`
@@ -31,20 +30,6 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 * [Traefik](https://github.com/containous/traefik-library-image) as reverse proxy and creation/renewal of Let's Encrypt certificates (see [this template](examples/traefik))
 
 ## Docker
-
-### Multi-platform image
-
-Following platforms for this image are available:
-
-```
-$ docker run --rm mplatform/mquery crazymax/qbittorrent:latest
-Image: crazymax/qbittorrent:latest
- * Manifest List: Yes
- * Supported platforms:
-   - linux/amd64
-   - linux/arm/v7
-   - linux/arm64
-```
 
 ### Environment variables
 
