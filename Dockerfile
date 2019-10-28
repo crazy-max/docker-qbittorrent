@@ -42,7 +42,7 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.1.8"
+ENV QBITTORRENT_VERSION="4.1.9"
 
 RUN cd /tmp \
   && git clone https://github.com/qbittorrent/qBittorrent.git \
@@ -77,12 +77,9 @@ COPY --from=builder /usr/local/bin/qbittorrent-nox /usr/bin/qbittorrent-nox
 RUN apk --update --no-cache add \
     bind-tools \
     curl \
-    py2-pip \
     qt5-qtbase \
     shadow \
     tzdata \
-  && pip install crudini \
-  && crudini --version \
   && rm -rf /tmp/* /var/cache/apk/*
 
 ENV QBITTORRENT_HOME="/home/qbittorrent" \
