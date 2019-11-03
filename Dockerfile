@@ -42,7 +42,7 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.1.9"
+ENV QBITTORRENT_VERSION="4.1.9.1"
 
 RUN cd /tmp \
   && git clone https://github.com/qbittorrent/qBittorrent.git \
