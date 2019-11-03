@@ -12,7 +12,7 @@
 
 ## About
 
-🐳 [qBittorrent](https://www.qbittorrent.org/) image based on Alpine Linux.<br />
+🐳 [qBittorrent](https://www.qbittorrent.org/) Docker image based on Alpine Linux.<br />
 If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 🐳 Docker images!
 
 💡 Want to be notified of new releases? Check out 🔔 [Diun (Docker Image Update Notifier)](https://github.com/crazy-max/diun) project!
