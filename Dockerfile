@@ -79,17 +79,20 @@ RUN apk --update --no-cache add \
     curl \
     qt5-qtbase \
     shadow \
+    su-exec \
     tzdata \
   && rm -rf /tmp/* /var/cache/apk/*
 
 ENV QBITTORRENT_HOME="/home/qbittorrent" \
-  TZ="UTC"
+  TZ="UTC" \
+  PUID="1500" \
+  PGID="1500"
 
 COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod a+x /entrypoint.sh \
-  && addgroup -g 1500 qbittorrent \
-  && adduser -D -h ${QBITTORRENT_HOME} -u 1500 -G qbittorrent -s /sbin/nologin qbittorrent \
+  && addgroup -g ${PGID} qbittorrent \
+  && adduser -D -h ${QBITTORRENT_HOME} -u ${PUID} -G qbittorrent -s /bin/sh qbittorrent \
   && mkdir -p \
     /data/config \
     /data/data \
@@ -100,8 +103,6 @@ RUN chmod a+x /entrypoint.sh \
   && ln -s /data/data ${QBITTORRENT_HOME}/.local/share/data/qBittorrent \
   && chown -R qbittorrent. /data ${QBITTORRENT_HOME} /var/log/qbittorrent
 
-USER qbittorrent
-
 EXPOSE 6881 6881/udp 8080
 WORKDIR /data
 VOLUME [ "/data" ]
@@ -109,5 +110,5 @@ VOLUME [ "/data" ]
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/usr/bin/qbittorrent-nox" ]
 
-HEALTHCHECK --interval=10s --timeout=10s --start-period=10s \
+HEALTHCHECK --interval=10s --timeout=10s --start-period=20s \
   CMD curl --fail http://127.0.0.1:8080/api/v2/app/version || exit 1

@@ -3,6 +3,16 @@
 WAN_IP=${WAN_IP:-$(dig +short myip.opendns.com @resolver1.opendns.com)}
 echo "WAN IP address is ${WAN_IP}"
 
+if [ -n "${PGID}" ] && [ "${PGID}" != "$(id -g qbittorrent)" ]; then
+  echo "Switching to PGID ${PGID}..."
+  sed -i -e "s/^qbittorrent:\([^:]*\):[0-9]*/qbittorrent:\1:${PGID}/" /etc/group
+  sed -i -e "s/^qbittorrent:\([^:]*\):\([0-9]*\):[0-9]*/qbittorrent:\1:\2:${PGID}/" /etc/passwd
+fi
+if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u qbittorrent)" ]; then
+  echo "Switching to PUID ${PUID}..."
+  sed -i -e "s/^qbittorrent:\([^:]*\):[0-9]*:\([0-9]*\)/qbittorrent:\1:${PUID}:\2/" /etc/passwd
+fi
+
 ALT_WEBUI=${ALT_WEBUI:-false}
 if [ "${ALT_WEBUI}" != "true" ]; then
   ALT_WEBUI=false
@@ -76,4 +86,7 @@ sed -i "s!WebUI\\Port.*!WebUI\\Port=8080!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\LocalHostAuth.*!WebUI\\LocalHostAuth=false!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\RootFolder.*!WebUI\\RootFolder==/data/webui!g" /data/config/qBittorrent.conf
 
-exec "$@"
+echo "Fixing perms..."
+chown -R qbittorrent:qbittorrent /data "${QBITTORRENT_HOME}" /var/log/qbittorrent
+
+exec su-exec qbittorrent:qbittorrent "$@"

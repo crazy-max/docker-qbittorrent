@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.9.1-RC2 (2019/11/18)
+
+* Allow to set custom `PUID`/`PGID`
+
 ## 4.1.9.1-RC1 (2019/11/03)
 
 * qBittorrent 4.1.9.1
