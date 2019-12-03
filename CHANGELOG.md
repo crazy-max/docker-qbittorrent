@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.0-RC1 (2019/12/03)
+
+* qBittorrent 4.2.0
+* libtorrent-rasterbar 1.2.2
+
 ## 4.1.9.1-RC2 (2019/11/18)
 
 * Allow to set custom `PUID`/`PGID`

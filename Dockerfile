@@ -21,7 +21,7 @@ RUN apk add --update --no-cache \
     zlib-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV LIBTORRENT_VERSION="1.1.13"
+ENV LIBTORRENT_VERSION="1.2.2"
 
 RUN cd /tmp \
   && git clone https://github.com/arvidn/libtorrent.git \
@@ -42,7 +42,7 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.1.9.1"
+ENV QBITTORRENT_VERSION="4.2.0"
 
 RUN cd /tmp \
   && git clone https://github.com/qbittorrent/qBittorrent.git \
@@ -71,16 +71,18 @@ LABEL maintainer="CrazyMax" \
   org.label-schema.vendor="CrazyMax" \
   org.label-schema.schema-version="1.0"
 
-COPY --from=builder /usr/local/lib/libtorrent-rasterbar.so.9.0.0 /usr/lib/libtorrent-rasterbar.so.9
+COPY --from=builder /usr/local/lib/libtorrent-rasterbar.so.10.0.0 /usr/lib/libtorrent-rasterbar.so.10
 COPY --from=builder /usr/local/bin/qbittorrent-nox /usr/bin/qbittorrent-nox
 
 RUN apk --update --no-cache add \
     bind-tools \
     curl \
+    openssl \
     qt5-qtbase \
     shadow \
     su-exec \
     tzdata \
+    zlib \
   && rm -rf /tmp/* /var/cache/apk/*
 
 ENV QBITTORRENT_HOME="/home/qbittorrent" \
