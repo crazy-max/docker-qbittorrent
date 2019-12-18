@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.1-RC1 (2019/12/18)
+
+* qBittorrent 4.2.1
+
 ## 4.2.0-RC1 (2019/12/03)
 
 * qBittorrent 4.2.0
