@@ -1,4 +1,4 @@
-FROM alpine:3.10 as builder
+FROM alpine:3.11 as builder
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -21,7 +21,7 @@ RUN apk add --update --no-cache \
     zlib-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV LIBTORRENT_VERSION="1.2.2"
+ENV LIBTORRENT_VERSION="1.2.3"
 
 RUN cd /tmp \
   && git clone https://github.com/arvidn/libtorrent.git \

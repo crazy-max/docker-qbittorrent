@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.1-RC2 (2020/01/23)
+
+* libtorrent-rasterbar 1.2.3
+* Alpine Linux 3.11
+
 ## 4.2.1-RC1 (2019/12/18)
 
 * qBittorrent 4.2.1
