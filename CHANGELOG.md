@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.2-RC1 (2020/03/25)
+
+* qBittorrent 4.2.2
+* libtorrent-rasterbar 1.2.5
+
 ## 4.2.1-RC2 (2020/01/23)
 
 * libtorrent-rasterbar 1.2.3
