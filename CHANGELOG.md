@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.3-RC1 (2020/04/05)
+
+* qBittorrent 4.2.3
+* Switch to Open Container Specification labels as label-schema.org ones are deprecated
+
 ## 4.2.2-RC1 (2020/03/25)
 
 * qBittorrent 4.2.2
