@@ -21,7 +21,7 @@ RUN apk add --update --no-cache \
     zlib-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV LIBTORRENT_VERSION="1.2.5"
+ENV LIBTORRENT_VERSION="1.2.6"
 
 RUN cd /tmp \
   && git clone https://github.com/arvidn/libtorrent.git \
@@ -42,7 +42,7 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.2.3"
+ENV QBITTORRENT_VERSION="4.2.4"
 
 RUN cd /tmp \
   && git clone https://github.com/qbittorrent/qBittorrent.git \
