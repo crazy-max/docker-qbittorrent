@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.5-RC1 (2020/04/25)
+
+* qBittorrent 4.2.5
+
 ## 4.2.4-RC1 (2020/04/23)
 
 * qBittorrent 4.2.4
