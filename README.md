@@ -13,9 +13,25 @@
 ## About
 
 🐳 [qBittorrent](https://www.qbittorrent.org/) Docker image based on Alpine Linux.<br />
-If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 🐳 Docker images!
+If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other Docker images!
 
 💡 Want to be notified of new releases? Check out 🔔 [Diun (Docker Image Update Notifier)](https://github.com/crazy-max/diun) project!
+
+___
+
+* [Features](#features)
+* [Environment variables](#environment-variables)
+* [Volumes](#volumes)
+* [Ports](#ports)
+* [Usage](#usage)
+  * [Docker Compose](#docker-compose)
+  * [Command line](#command-line)
+* [Upgrade](#upgrade)
+* [Notes](#notes)
+  * [qBittorrent Web API](#qbittorrent-web-api)
+  * [Change username and password](#change-username-and-password)
+* [How can I help?](#how-can-i-help)
+* [License](#license)
 
 ## Features
 
@@ -29,9 +45,7 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 * Logs managed through a [dedicated container](examples/traefik/docker-compose.yml)
 * [Traefik](https://github.com/containous/traefik-library-image) as reverse proxy and creation/renewal of Let's Encrypt certificates (see [this template](examples/traefik))
 
-## Docker
-
-### Environment variables
+## Environment variables
 
 * `TZ`: Timezone assigned to the container (default `UTC`)
 * `PUID`: qBittorrent user id (default `1000`)
@@ -39,13 +53,13 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 * `WAN_IP`: Public IP address reported to the tracker (default auto resolved with `dig +short myip.opendns.com @resolver1.opendns.com`)
 * `ALT_WEBUI`: Enable alternative WebUI located in `/data/webui` (default `false`)
 
-### Volumes
+## Volumes
 
 * `/data`: qBittorrent config, downloads, temp, torrents, watch, webui...
 
 > :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`. If you don't give the volume correct permissions, the container may not start.
 
-### Ports
+## Ports
 
 * `6881`: DHT port
 * `8080`: qBittorrent HTTP port
@@ -76,7 +90,7 @@ $ docker run -d --name qbittorrent \
   crazymax/qbittorrent:latest
 ```
 
-## Update
+## Upgrade
 
 Recreate the container whenever I push an update:
 
@@ -106,7 +120,7 @@ $ docker-compose exec qbittorrent curl --fail -X POST \
   http://127.0.0.1:8080/api/v2/app/setPreferences
 ```
 
-## How can I help ?
+## How can I help?
 
 All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon: You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
 
