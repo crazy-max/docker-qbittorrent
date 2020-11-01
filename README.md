@@ -19,9 +19,11 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 ___
 
 * [Features](#features)
-* [Environment variables](#environment-variables)
-* [Volumes](#volumes)
-* [Ports](#ports)
+* [Docker](#docker)
+  * [Image](#image)
+  * [Environment variables](#environment-variables)
+  * [Volumes](#volumes)
+  * [Ports](#ports)
 * [Usage](#usage)
   * [Docker Compose](#docker-compose)
   * [Command line](#command-line)
@@ -44,7 +46,16 @@ ___
 * Logs managed through a [dedicated container](examples/traefik/docker-compose.yml)
 * [Traefik](https://github.com/containous/traefik-library-image) as reverse proxy and creation/renewal of Let's Encrypt certificates (see [this template](examples/traefik))
 
-## Environment variables
+## Docker
+
+### Image
+
+| Registry                                                                                         | Image                           |
+|--------------------------------------------------------------------------------------------------|---------------------------------|
+| [Docker Hub](https://hub.docker.com/r/crazymax/qbittorrent/)                                            | `crazymax/qbittorrent`                 |
+| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/qbittorrent)  | `ghcr.io/crazy-max/qbittorrent`        |
+
+### Environment variables
 
 * `TZ`: Timezone assigned to the container (default `UTC`)
 * `PUID`: qBittorrent user id (default `1000`)
@@ -52,13 +63,14 @@ ___
 * `WAN_IP`: Public IP address reported to the tracker (default auto resolved with `dig +short myip.opendns.com @resolver1.opendns.com`)
 * `ALT_WEBUI`: Enable alternative WebUI located in `/data/webui` (default `false`)
 
-## Volumes
+### Volumes
 
 * `/data`: qBittorrent config, downloads, temp, torrents, watch, webui...
 
-> :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`. If you don't give the volume correct permissions, the container may not start.
+> :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`.
+> If you don't give the volume correct permissions, the container may not start.
 
-## Ports
+### Ports
 
 * `6881`: DHT port
 * `8080`: qBittorrent HTTP port
@@ -67,7 +79,8 @@ ___
 
 ### Docker Compose
 
-Docker compose is the recommended way to run this image. You can use the following [docker compose template](examples/compose/docker-compose.yml), then run the container:
+Docker compose is the recommended way to run this image. You can use the following
+[docker compose template](examples/compose/docker-compose.yml), then run the container:
 
 ```bash
 $ docker-compose up -d
@@ -102,7 +115,8 @@ docker-compose up -d
 
 ### qBittorrent Web API
 
-[qBittorrent Web API](https://github.com/qbittorrent/qBittorrent/wiki/Web-API-Documentation) can be used within this image using curl.
+[qBittorrent Web API](https://github.com/qbittorrent/qBittorrent/wiki/Web-API-Documentation) can be used within
+this image using curl.
 
 ```
 $ docker-compose exec qbittorrent curl --fail http://127.0.0.1:8080/api/v2/app/version
@@ -121,7 +135,10 @@ $ docker-compose exec qbittorrent curl --fail -X POST \
 
 ## How can I help?
 
-All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon: You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
+All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2:
+the project, or to raise issues :speech_balloon: You can also support this project by
+[**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making
+a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
 
 Thanks again for your support, it is much appreciated! :pray:
 
