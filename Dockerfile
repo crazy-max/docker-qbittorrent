@@ -5,7 +5,6 @@ RUN apk add --update --no-cache \
     automake \
     binutils \
     boost-dev \
-    boost-python3 \
     build-base \
     cppunit-dev \
     git \
@@ -13,22 +12,16 @@ RUN apk add --update --no-cache \
     linux-headers \
     ncurses-dev \
     openssl-dev \
-    python3-dev \
     zlib-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV LIBTORRENT_VERSION="1.2.7"
+ENV LIBTORRENT_VERSION="1.2.12"
 
 RUN cd /tmp \
-  && git clone https://github.com/arvidn/libtorrent.git \
+  && git clone --branch v${LIBTORRENT_VERSION} --recurse-submodules https://github.com/arvidn/libtorrent.git \
   && cd libtorrent \
-  && git checkout tags/libtorrent_${LIBTORRENT_VERSION//./_} \
   && ./autotool.sh \
-  && ./configure \
-    --with-libiconv \
-    --enable-python-binding \
-    --with-boost-python="$(ls -1 /usr/lib/libboost_python3*.so* | sort | head -1 | sed 's/.*.\/lib\(.*\)\.so.*/\1/')" \
-    PYTHON="$(which python3)" \
+  && ./configure CXXFLAGS="-std=c++14" --with-libiconv \
   && make -j$(nproc) \
   && make install-strip \
   && ls -al /usr/local/lib/
@@ -38,13 +31,12 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.2.5"
+ENV QBITTORRENT_VERSION="4.3.2"
 
 RUN cd /tmp \
-  && git clone https://github.com/qbittorrent/qBittorrent.git \
+  && git clone --branch release-${QBITTORRENT_VERSION} https://github.com/qbittorrent/qBittorrent.git \
   && cd qBittorrent \
-  && git checkout tags/release-${QBITTORRENT_VERSION} \
-  && ./configure --disable-gui \
+  && ./configure CXXFLAGS="-std=c++14" --disable-gui \
   && make -j$(nproc) \
   && make install \
   && ls -al /usr/local/bin/ \
@@ -86,7 +78,8 @@ RUN chmod a+x /entrypoint.sh \
     /var/log/qbittorrent \
   && ln -s /data/config ${QBITTORRENT_HOME}/.config/qBittorrent \
   && ln -s /data/data ${QBITTORRENT_HOME}/.local/share/data/qBittorrent \
-  && chown -R qbittorrent. /data ${QBITTORRENT_HOME} /var/log/qbittorrent
+  && chown -R qbittorrent. /data ${QBITTORRENT_HOME} /var/log/qbittorrent \
+  && qbittorrent-nox --version
 
 EXPOSE 6881 6881/udp 8080
 WORKDIR /data
