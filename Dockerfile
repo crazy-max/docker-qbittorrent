@@ -74,10 +74,10 @@ RUN chmod a+x /entrypoint.sh \
     /data/config \
     /data/data \
     ${QBITTORRENT_HOME}/.config \
-    ${QBITTORRENT_HOME}/.local/share/data \
+    ${QBITTORRENT_HOME}/.local/share \
     /var/log/qbittorrent \
   && ln -s /data/config ${QBITTORRENT_HOME}/.config/qBittorrent \
-  && ln -s /data/data ${QBITTORRENT_HOME}/.local/share/data/qBittorrent \
+  && ln -s /data/data ${QBITTORRENT_HOME}/.local/share/qBittorrent \
   && chown -R qbittorrent. /data ${QBITTORRENT_HOME} /var/log/qbittorrent \
   && qbittorrent-nox --version
 
