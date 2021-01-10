@@ -84,7 +84,7 @@ sed -i "s!WebUI\\Enabled.*!WebUI\\Enabled=true!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\Address.*!WebUI\\Address=0\.0\.0\.0!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\Port.*!WebUI\\Port=8080!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\LocalHostAuth.*!WebUI\\LocalHostAuth=false!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\RootFolder.*!WebUI\\RootFolder==/data/webui!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\RootFolder.*!WebUI\\RootFolder=/data/webui!g" /data/config/qBittorrent.conf
 
 echo "Fixing perms..."
 chown -R qbittorrent:qbittorrent /data "${QBITTORRENT_HOME}" /var/log/qbittorrent
