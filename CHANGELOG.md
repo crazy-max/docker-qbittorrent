@@ -4,6 +4,8 @@
 
 * qBittorrent 4.3.2
 * libtorrent-rasterbar 1.2.12
+* Fix `RootFolder` config
+* Fix legacy data directory
 
 ## 4.2.5-RC2 (2020/06/15)
 
