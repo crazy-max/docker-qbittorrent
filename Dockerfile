@@ -63,7 +63,8 @@ RUN apk --update --no-cache add \
 ENV QBITTORRENT_HOME="/home/qbittorrent" \
   TZ="UTC" \
   PUID="1500" \
-  PGID="1500"
+  PGID="1500" \
+  WEBUI_PORT="8080"
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -89,4 +90,4 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/usr/bin/qbittorrent-nox" ]
 
 HEALTHCHECK --interval=10s --timeout=10s --start-period=20s \
-  CMD curl --fail http://127.0.0.1:8080/api/v2/app/version || exit 1
+  CMD curl --fail http://127.0.0.1:${WEBUI_PORT}/api/v2/app/version || exit 1

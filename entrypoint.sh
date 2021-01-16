@@ -60,7 +60,7 @@ General\UseRandomPort=false
 WebUI\Enabled=true
 WebUI\HTTPS\Enabled=false
 WebUI\Address=0.0.0.0
-WebUI\Port=8080
+WebUI\Port=${WEBUI_PORT}
 WebUI\LocalHostAuth=false
 WebUI\AlternativeUIEnabled=${ALT_WEBUI}
 WebUI\RootFolder=/data/webui
@@ -82,7 +82,7 @@ sed -i "s!Downloads\\\TempPathEnabled.*!Downloads\\\TempPathEnabled=true!g" /dat
 sed -i "s!Downloads\\\FinishedTorrentExportDir.*!Downloads\\\FinishedTorrentExportDir=/data/torrents!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\\Enabled.*!WebUI\\\Enabled=true!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\\Address.*!WebUI\\\Address=0\.0\.0\.0!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\\Port.*!WebUI\\\Port=8080!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\\Port.*!WebUI\\\Port=${WEBUI_PORT}!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\\LocalHostAuth.*!WebUI\\\LocalHostAuth=false!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\\RootFolder.*!WebUI\\\RootFolder=/data/webui!g" /data/config/qBittorrent.conf
 
