@@ -77,7 +77,7 @@ sed -i "s!Connection\\\UseUPnP.*!Connection\\\UseUPnP=false!g" /data/config/qBit
 sed -i "s!Connection\\\InetAddress.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\SavePath.*!Downloads\\\SavePath=/data/downloads!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\ScanDirsV2.*!Downloads\\\ScanDirsV2=${WATCH_DIR}!g" /data/config/qBittorrent.conf
-sed -i "s!Downloads\\\TempPath.*!Downloads\\\TempPath=/data/temp!g" /data/config/qBittorrent.conf
+sed -i "s!Downloads\\\TempPath=.*!Downloads\\\TempPath=/data/temp!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\TempPathEnabled.*!Downloads\\\TempPathEnabled=true!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\FinishedTorrentExportDir.*!Downloads\\\FinishedTorrentExportDir=/data/torrents!g" /data/config/qBittorrent.conf
 sed -i "s!WebUI\\\Enabled.*!WebUI\\\Enabled=true!g" /data/config/qBittorrent.conf
