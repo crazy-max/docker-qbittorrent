@@ -21,7 +21,7 @@ RUN cd /tmp \
   && git clone --branch v${LIBTORRENT_VERSION} --recurse-submodules https://github.com/arvidn/libtorrent.git \
   && cd libtorrent \
   && ./autotool.sh \
-  && ./configure --with-libiconv \
+  && ./configure CXXFLAGS="-std=c++14" --with-libiconv \
   && make -j$(nproc) \
   && make install-strip \
   && ls -al /usr/local/lib/
