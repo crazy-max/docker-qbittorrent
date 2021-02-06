@@ -21,7 +21,7 @@ RUN cd /tmp \
   && git clone --branch v${LIBTORRENT_VERSION} --recurse-submodules https://github.com/arvidn/libtorrent.git \
   && cd libtorrent \
   && ./autotool.sh \
-  && ./configure CXXFLAGS="-std=c++14" --with-libiconv \
+  && ./configure --with-libiconv \
   && make -j$(nproc) \
   && make install-strip \
   && ls -al /usr/local/lib/
@@ -31,12 +31,12 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.3.2"
+ENV QBITTORRENT_VERSION="4.3.3"
 
 RUN cd /tmp \
   && git clone --branch release-${QBITTORRENT_VERSION} https://github.com/qbittorrent/qBittorrent.git \
   && cd qBittorrent \
-  && ./configure CXXFLAGS="-std=c++14" --disable-gui \
+  && ./configure --disable-gui \
   && make -j$(nproc) \
   && make install \
   && ls -al /usr/local/bin/ \
