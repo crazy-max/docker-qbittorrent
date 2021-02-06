@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.3.3-r0 (2021/02/06)
+
+* qBittorrent 4.3.3
+* Switch to buildx bake
+* Fix `TempPathEnabled` being overwritten (#22)
+* Add `WEBUI_PORT` and adjust `HEALTHCHECK` (#21)
+* Fix sed not replacing the expected parameters (#20)
+
 ## 4.3.2-RC1 (2021/01/10)
 
 * qBittorrent 4.3.2
