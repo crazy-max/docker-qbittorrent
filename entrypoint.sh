@@ -13,6 +13,7 @@ if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u qbittorrent)" ]; then
   sed -i -e "s/^qbittorrent:\([^:]*\):[0-9]*:\([0-9]*\)/qbittorrent:\1:${PUID}:\2/" /etc/passwd
 fi
 
+WEBUI_PORT=${WEBUI_PORT:-8080}
 ALT_WEBUI=${ALT_WEBUI:-false}
 if [ "${ALT_WEBUI}" != "true" ]; then
   ALT_WEBUI=false
@@ -69,22 +70,22 @@ fi
 
 echo "Overriding required parameters..."
 sed -i "s!ported_to_new_savepath_system.*!ported_to_new_savepath_system=true!g" /data/config/qBittorrent.conf
-sed -i "s!FileLogger\\\Enabled.*!FileLogger\\\Enabled=true!g" /data/config/qBittorrent.conf
-sed -i "s!FileLogger\\\Path.*!FileLogger\\\Path=/var/log/qbittorrent!g" /data/config/qBittorrent.conf
-sed -i "s!Connection\\\InetAddress.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
-sed -i "s!Connection\\\InterfaceListenIPv6.*!Connection\\\InterfaceListenIPv6=false!g" /data/config/qBittorrent.conf
-sed -i "s!Connection\\\UseUPnP.*!Connection\\\UseUPnP=false!g" /data/config/qBittorrent.conf
-sed -i "s!Connection\\\InetAddress.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
-sed -i "s!Downloads\\\SavePath.*!Downloads\\\SavePath=/data/downloads!g" /data/config/qBittorrent.conf
-sed -i "s!Downloads\\\ScanDirsV2.*!Downloads\\\ScanDirsV2=${WATCH_DIR}!g" /data/config/qBittorrent.conf
+sed -i "s!FileLogger\\\Enabled=.*!FileLogger\\\Enabled=true!g" /data/config/qBittorrent.conf
+sed -i "s!FileLogger\\\Path=.*!FileLogger\\\Path=/var/log/qbittorrent!g" /data/config/qBittorrent.conf
+sed -i "s!Connection\\\InetAddress=.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
+sed -i "s!Connection\\\InterfaceListenIPv6=.*!Connection\\\InterfaceListenIPv6=false!g" /data/config/qBittorrent.conf
+sed -i "s!Connection\\\UseUPnP=.*!Connection\\\UseUPnP=false!g" /data/config/qBittorrent.conf
+sed -i "s!Connection\\\InetAddress=.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
+sed -i "s!Downloads\\\SavePath=.*!Downloads\\\SavePath=/data/downloads!g" /data/config/qBittorrent.conf
+sed -i "s!Downloads\\\ScanDirsV2=.*!Downloads\\\ScanDirsV2=${WATCH_DIR}!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\TempPath=.*!Downloads\\\TempPath=/data/temp!g" /data/config/qBittorrent.conf
-sed -i "s!Downloads\\\TempPathEnabled.*!Downloads\\\TempPathEnabled=true!g" /data/config/qBittorrent.conf
-sed -i "s!Downloads\\\FinishedTorrentExportDir.*!Downloads\\\FinishedTorrentExportDir=/data/torrents!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\\Enabled.*!WebUI\\\Enabled=true!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\\Address.*!WebUI\\\Address=0\.0\.0\.0!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\\Port.*!WebUI\\\Port=${WEBUI_PORT}!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\\LocalHostAuth.*!WebUI\\\LocalHostAuth=false!g" /data/config/qBittorrent.conf
-sed -i "s!WebUI\\\RootFolder.*!WebUI\\\RootFolder=/data/webui!g" /data/config/qBittorrent.conf
+sed -i "s!Downloads\\\TempPathEnabled=.*!Downloads\\\TempPathEnabled=true!g" /data/config/qBittorrent.conf
+sed -i "s!Downloads\\\FinishedTorrentExportDir=.*!Downloads\\\FinishedTorrentExportDir=/data/torrents!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\\Enabled=.*!WebUI\\\Enabled=true!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\\Address=.*!WebUI\\\Address=0\.0\.0\.0!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\\Port=.*!WebUI\\\Port=${WEBUI_PORT}!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\\LocalHostAuth=.*!WebUI\\\LocalHostAuth=false!g" /data/config/qBittorrent.conf
+sed -i "s!WebUI\\\RootFolder=.*!WebUI\\\RootFolder=/data/webui!g" /data/config/qBittorrent.conf
 
 echo "Fixing perms..."
 chown -R qbittorrent:qbittorrent /data "${QBITTORRENT_HOME}" /var/log/qbittorrent

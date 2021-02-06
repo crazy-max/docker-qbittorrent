@@ -19,11 +19,10 @@ If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other 
 ___
 
 * [Features](#features)
-* [Docker](#docker)
-  * [Image](#image)
-  * [Environment variables](#environment-variables)
-  * [Volumes](#volumes)
-  * [Ports](#ports)
+* [Image](#image)
+* [Environment variables](#environment-variables)
+* [Volumes](#volumes)
+* [Ports](#ports)
 * [Usage](#usage)
   * [Docker Compose](#docker-compose)
   * [Command line](#command-line)
@@ -46,31 +45,30 @@ ___
 * Logs managed through a [dedicated container](examples/traefik/docker-compose.yml)
 * [Traefik](https://github.com/containous/traefik-library-image) as reverse proxy and creation/renewal of Let's Encrypt certificates (see [this template](examples/traefik))
 
-## Docker
-
-### Image
+## Image
 
 | Registry                                                                                         | Image                           |
 |--------------------------------------------------------------------------------------------------|---------------------------------|
 | [Docker Hub](https://hub.docker.com/r/crazymax/qbittorrent/)                                            | `crazymax/qbittorrent`                 |
 | [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/qbittorrent)  | `ghcr.io/crazy-max/qbittorrent`        |
 
-### Environment variables
+## Environment variables
 
 * `TZ`: Timezone assigned to the container (default `UTC`)
 * `PUID`: qBittorrent user id (default `1000`)
 * `PGID`: qBittorrent group id (default `1000`)
 * `WAN_IP`: Public IP address reported to the tracker (default auto resolved with `dig +short myip.opendns.com @resolver1.opendns.com`)
+* `WEBUI_PORT`: WebUI port to be used (default `8080`)
 * `ALT_WEBUI`: Enable alternative WebUI located in `/data/webui` (default `false`)
 
-### Volumes
+## Volumes
 
 * `/data`: qBittorrent config, downloads, temp, torrents, watch, webui...
 
 > :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`.
 > If you don't give the volume correct permissions, the container may not start.
 
-### Ports
+## Ports
 
 * `6881`: DHT port
 * `8080`: qBittorrent HTTP port
