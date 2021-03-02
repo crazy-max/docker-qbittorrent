@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.3-r1 (2021/03/02)
+
+* Switch to `gosu`
+
 ## 4.3.3-r0 (2021/02/06)
 
 * qBittorrent 4.3.3

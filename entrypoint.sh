@@ -90,4 +90,4 @@ sed -i "s!WebUI\\\RootFolder=.*!WebUI\\\RootFolder=/data/webui!g" /data/config/q
 echo "Fixing perms..."
 chown -R qbittorrent:qbittorrent /data "${QBITTORRENT_HOME}" /var/log/qbittorrent
 
-exec su-exec qbittorrent:qbittorrent "$@"
+exec gosu qbittorrent:qbittorrent "$@"

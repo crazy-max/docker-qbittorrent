@@ -1,3 +1,7 @@
+ARG LIBTORRENT_VERSION=1.2.12
+ARG QBITTORRENT_VERSION=4.3.3
+
+FROM crazymax/gosu:latest AS gosu
 FROM alpine:3.12 as builder
 
 RUN apk add --update --no-cache \
@@ -15,8 +19,7 @@ RUN apk add --update --no-cache \
     zlib-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV LIBTORRENT_VERSION="1.2.12"
-
+ARG LIBTORRENT_VERSION
 RUN cd /tmp \
   && git clone --branch v${LIBTORRENT_VERSION} --recurse-submodules https://github.com/arvidn/libtorrent.git \
   && cd libtorrent \
@@ -31,8 +34,7 @@ RUN apk add --update --no-cache \
     qt5-qttools-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
-ENV QBITTORRENT_VERSION="4.3.3"
-
+ARG QBITTORRENT_VERSION
 RUN cd /tmp \
   && git clone --branch release-${QBITTORRENT_VERSION} https://github.com/qbittorrent/qBittorrent.git \
   && cd qBittorrent \
@@ -46,6 +48,7 @@ FROM alpine:3.12
 
 LABEL maintainer="CrazyMax"
 
+COPY --from=gosu / /
 COPY --from=builder /usr/local/lib/libtorrent-rasterbar.so.10.0.0 /usr/lib/libtorrent-rasterbar.so.10
 COPY --from=builder /usr/local/bin/qbittorrent-nox /usr/bin/qbittorrent-nox
 
@@ -55,7 +58,6 @@ RUN apk --update --no-cache add \
     openssl \
     qt5-qtbase \
     shadow \
-    su-exec \
     tzdata \
     zlib \
   && rm -rf /tmp/* /var/cache/apk/*
