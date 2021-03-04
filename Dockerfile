@@ -1,8 +1,8 @@
 ARG LIBTORRENT_VERSION=1.2.12
 ARG QBITTORRENT_VERSION=4.3.3
 
-FROM crazymax/gosu:latest AS gosu
-FROM alpine:3.12 as builder
+FROM crazymax/yasu:latest AS yasu
+FROM alpine:3.12 AS builder
 
 RUN apk add --update --no-cache \
     autoconf \
@@ -48,7 +48,7 @@ FROM alpine:3.12
 
 LABEL maintainer="CrazyMax"
 
-COPY --from=gosu / /
+COPY --from=yasu / /
 COPY --from=builder /usr/local/lib/libtorrent-rasterbar.so.10.0.0 /usr/lib/libtorrent-rasterbar.so.10
 COPY --from=builder /usr/local/bin/qbittorrent-nox /usr/bin/qbittorrent-nox
 
