@@ -73,15 +73,6 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh \
   && addgroup -g ${PGID} qbittorrent \
   && adduser -D -h ${QBITTORRENT_HOME} -u ${PUID} -G qbittorrent -s /bin/sh qbittorrent \
-  && mkdir -p \
-    /data/config \
-    /data/data \
-    ${QBITTORRENT_HOME}/.config \
-    ${QBITTORRENT_HOME}/.local/share \
-    /var/log/qbittorrent \
-  && ln -s /data/config ${QBITTORRENT_HOME}/.config/qBittorrent \
-  && ln -s /data/data ${QBITTORRENT_HOME}/.local/share/qBittorrent \
-  && chown -R qbittorrent. /data ${QBITTORRENT_HOME} /var/log/qbittorrent \
   && qbittorrent-nox --version
 
 EXPOSE 6881 6881/udp 8080

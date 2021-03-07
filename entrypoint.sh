@@ -23,11 +23,18 @@ fi
 WATCH_DIR="@Variant(\0\0\0\x1c\0\0\0\x1\0\0\0\x16\0/\0\x64\0\x61\0t\0\x61\0/\0w\0\x61\0t\0\x63\0h\0\0\0\x2\0\0\0\x1)"
 
 echo "Creating folders..."
-mkdir -p /data/downloads \
+mkdir -p /data/config \
+  /data/data \
+  /data/downloads \
   /data/temp \
   /data/torrents \
   /data/watch \
-  /data/webui
+  /data/webui \
+  ${QBITTORRENT_HOME}/.config \
+  ${QBITTORRENT_HOME}/.local/share \
+  /var/log/qbittorrent
+ln -s /data/config "${QBITTORRENT_HOME}/.config/qBittorrent"
+ln -s /data/data "${QBITTORRENT_HOME}/.local/share/qBittorrent"
 
 # https://github.com/qbittorrent/qBittorrent/blob/master/src/base/settingsstorage.cpp
 if [ ! -f /data/config/qBittorrent.conf ]; then
@@ -88,6 +95,14 @@ sed -i "s!WebUI\\\LocalHostAuth=.*!WebUI\\\LocalHostAuth=false!g" /data/config/q
 sed -i "s!WebUI\\\RootFolder=.*!WebUI\\\RootFolder=/data/webui!g" /data/config/qBittorrent.conf
 
 echo "Fixing perms..."
-chown -R qbittorrent:qbittorrent /data "${QBITTORRENT_HOME}" /var/log/qbittorrent
+chown qbittorrent:qbittorrent /data \
+  /data/config \
+  /data/data \
+  /data/downloads \
+  /data/temp \
+  /data/torrents \
+  /data/watch \
+  /data/webui
+chown -R qbittorrent:qbittorrent "${QBITTORRENT_HOME}" /var/log/qbittorrent
 
 exec yasu qbittorrent:qbittorrent "$@"
