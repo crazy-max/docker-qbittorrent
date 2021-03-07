@@ -23,7 +23,8 @@ fi
 WATCH_DIR="@Variant(\0\0\0\x1c\0\0\0\x1\0\0\0\x16\0/\0\x64\0\x61\0t\0\x61\0/\0w\0\x61\0t\0\x63\0h\0\0\0\x2\0\0\0\x1)"
 
 echo "Creating folders..."
-mkdir -p /data/downloads \
+mkdir -p /data/config \
+  /data/downloads \
   /data/temp \
   /data/torrents \
   /data/watch \
