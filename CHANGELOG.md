@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.3-r3 (2021/03/07)
+
+* Fix folder creation (#23 #24)
+
 ## 4.3.3-r2 (2021/03/04)
 
 * Renamed `yasu` (more info https://github.com/crazy-max/yasu#yet-another)
