@@ -19,9 +19,6 @@ if [ "${ALT_WEBUI}" != "true" ]; then
   ALT_WEBUI=false
 fi
 
-# /data/watch | Default save location
-WATCH_DIR="@Variant(\0\0\0\x1c\0\0\0\x1\0\0\0\x16\0/\0\x64\0\x61\0t\0\x61\0/\0w\0\x61\0t\0\x63\0h\0\0\0\x2\0\0\0\x1)"
-
 echo "Creating folders..."
 mkdir -p /data/config \
   /data/data \
@@ -58,7 +55,6 @@ Connection\PortRangeMin=6881
 Connection\UseUPnP=false
 Downloads\PreAllocation=true
 Downloads\SavePath=/data/downloads
-Downloads\ScanDirsV2=${WATCH_DIR}
 Downloads\StartInPause=false
 Downloads\TempPath=/data/temp
 Downloads\TempPathEnabled=true
@@ -84,7 +80,6 @@ sed -i "s!Connection\\\InterfaceListenIPv6=.*!Connection\\\InterfaceListenIPv6=f
 sed -i "s!Connection\\\UseUPnP=.*!Connection\\\UseUPnP=false!g" /data/config/qBittorrent.conf
 sed -i "s!Connection\\\InetAddress=.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\SavePath=.*!Downloads\\\SavePath=/data/downloads!g" /data/config/qBittorrent.conf
-sed -i "s!Downloads\\\ScanDirsV2=.*!Downloads\\\ScanDirsV2=${WATCH_DIR}!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\TempPath=.*!Downloads\\\TempPath=/data/temp!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\TempPathEnabled=.*!Downloads\\\TempPathEnabled=true!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\FinishedTorrentExportDir=.*!Downloads\\\FinishedTorrentExportDir=/data/torrents!g" /data/config/qBittorrent.conf

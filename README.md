@@ -31,6 +31,7 @@ ___
 * [Notes](#notes)
   * [qBittorrent Web API](#qbittorrent-web-api)
   * [Change username and password](#change-username-and-password)
+  * [Watch torrents](#watch-torrents)
 * [How can I help?](#how-can-i-help)
 * [License](#license)
 
@@ -139,9 +140,23 @@ v4.1.8
 
 You can change the default username `admin` and password `adminadmin` through the API or WebUI.
 
-```
-$ docker-compose exec qbittorrent curl --fail -X POST \
+```shell
+docker-compose exec qbittorrent curl --fail -X POST \
   -d 'json={"web_ui_username":"myuser","web_ui_password":"mypassword"}' \
+  http://127.0.0.1:8080/api/v2/app/setPreferences
+```
+
+### Watch torrents
+
+You can configure the monitored folders on the qBittorrent interface:
+
+![](.github/qbittorrent-watch.png)
+
+Or through the API:
+
+```shell
+docker-compose exec qbittorrent curl --fail -X POST \
+  -d 'json={"scan_dirs":{"/data/watch": 1}}' \
   http://127.0.0.1:8080/api/v2/app/setPreferences
 ```
 
