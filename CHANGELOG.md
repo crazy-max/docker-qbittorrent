@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.3-r4 (2021/03/09)
+
+* Handle watch dir manually (#25)
+
 ## 4.3.3-r3 (2021/03/07)
 
 * Fix folder creation (#23 #24)

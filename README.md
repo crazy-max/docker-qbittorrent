@@ -41,7 +41,7 @@ ___
 * Latest [qBittorrent](https://github.com/qbittorrent/qBittorrent) / [libtorrent-rasterbar](https://github.com/arvidn/libtorrent) release compiled from source
 * WAN IP address automatically resolved for reporting to the tracker
 * Finished torrents automatically saved to `/data/torrents`
-* Handle watch directory from `/data/watch`
+* Handle [watch directory](#watch-torrents) from `/data/watch`
 * Ability to use an [alternative WebUI](https://github.com/qbittorrent/qBittorrent/wiki/Alternate-WebUI-usage) in `/data/webui`
 * Healthcheck through [qBittorrent API](https://github.com/qbittorrent/qBittorrent/wiki/Web-API-Documentation)
 * Logs managed through a [dedicated container](examples/traefik/docker-compose.yml)
