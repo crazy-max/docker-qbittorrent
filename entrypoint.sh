@@ -30,8 +30,12 @@ mkdir -p /data/config \
   ${QBITTORRENT_HOME}/.config \
   ${QBITTORRENT_HOME}/.local/share \
   /var/log/qbittorrent
-ln -s /data/config "${QBITTORRENT_HOME}/.config/qBittorrent"
-ln -s /data/data "${QBITTORRENT_HOME}/.local/share/qBittorrent"
+if [ ! -e "${QBITTORRENT_HOME}/.config/qBittorrent" ]; then
+  ln -s /data/config "${QBITTORRENT_HOME}/.config/qBittorrent"
+fi
+if [ ! -e "${QBITTORRENT_HOME}/.local/share/qBittorrent" ]; then
+  ln -s /data/data "${QBITTORRENT_HOME}/.local/share/qBittorrent"
+fi
 
 # https://github.com/qbittorrent/qBittorrent/blob/master/src/base/settingsstorage.cpp
 if [ ! -f /data/config/qBittorrent.conf ]; then
