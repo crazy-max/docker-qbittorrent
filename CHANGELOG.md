@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.3-r5 (2021/03/12)
+
+* Only create symlinks if targets do not yet exist (#27)
+
 ## 4.3.3-r4 (2021/03/09)
 
 * Handle watch dir manually (#25)
