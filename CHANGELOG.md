@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.4.1-r0 (2021/03/26)
+
+* qBittorrent 4.3.4.1
+
 ## 4.3.3-r5 (2021/03/12)
 
 * Only create symlinks if targets do not yet exist (#27)
