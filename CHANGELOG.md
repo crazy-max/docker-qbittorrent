@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.3.5-r0 (2021/05/06)
+
+* qBittorrent 4.3.5
+* libtorrent-rasterbar 1.2.13
+
 ## 4.3.4.1-r0 (2021/03/26)
 
 * qBittorrent 4.3.4.1

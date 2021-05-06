@@ -1,5 +1,5 @@
-ARG LIBTORRENT_VERSION=1.2.12
-ARG QBITTORRENT_VERSION=4.3.4.1
+ARG LIBTORRENT_VERSION=1.2.13
+ARG QBITTORRENT_VERSION=4.3.5
 
 FROM crazymax/yasu:latest AS yasu
 FROM alpine:3.12 AS builder
@@ -75,7 +75,7 @@ RUN chmod a+x /entrypoint.sh \
   && adduser -D -h ${QBITTORRENT_HOME} -u ${PUID} -G qbittorrent -s /bin/sh qbittorrent \
   && qbittorrent-nox --version
 
-EXPOSE 6881 6881/udp 8080
+EXPOSE 6881 6881/udp ${WEBUI_PORT}
 WORKDIR /data
 VOLUME [ "/data" ]
 
