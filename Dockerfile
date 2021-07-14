@@ -1,5 +1,5 @@
-ARG LIBTORRENT_VERSION=1.2.13
-ARG QBITTORRENT_VERSION=4.3.5
+ARG LIBTORRENT_VERSION=1.2.14
+ARG QBITTORRENT_VERSION=4.3.6
 
 FROM crazymax/yasu:latest AS yasu
 FROM alpine:3.12 AS builder
@@ -45,8 +45,6 @@ RUN cd /tmp \
   && qbittorrent-nox --help
 
 FROM alpine:3.12
-
-LABEL maintainer="CrazyMax"
 
 COPY --from=yasu / /
 COPY --from=builder /usr/local/lib/libtorrent-rasterbar.so.10.0.0 /usr/lib/libtorrent-rasterbar.so.10
