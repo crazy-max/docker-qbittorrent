@@ -3,6 +3,7 @@
 ## 4.3.8-r0 (2021/09/10)
 
 * qBittorrent 4.3.8
+* Add `unrar` and `unzip` package
 
 ## 4.3.6-r1 (2021/08/19)
 

@@ -57,6 +57,8 @@ RUN apk --update --no-cache add \
     qt5-qtbase \
     shadow \
     tzdata \
+    unrar \
+    unzip \
     zlib \
   && rm -rf /tmp/* /var/cache/apk/*
 
