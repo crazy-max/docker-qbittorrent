@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.8-r0 (2021/09/10)
+
+* qBittorrent 4.3.8
+
 ## 4.3.6-r1 (2021/08/19)
 
 * Alpine Linux 3.14 (#37)
