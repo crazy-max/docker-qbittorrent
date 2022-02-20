@@ -2,7 +2,7 @@ ARG LIBTORRENT_VERSION=1.2.14
 ARG QBITTORRENT_VERSION=4.3.8
 
 FROM crazymax/yasu:latest AS yasu
-FROM alpine:3.14 AS builder
+FROM alpine:3.15 AS builder
 
 RUN apk add --update --no-cache \
     autoconf \
@@ -17,7 +17,7 @@ RUN apk add --update --no-cache \
     ncurses-dev \
     openssl-dev \
     zlib-dev \
-  && rm -rf /tmp/* /var/cache/apk/*
+  && rm -rf /tmp/*
 
 ARG LIBTORRENT_VERSION
 RUN cd /tmp \
@@ -32,7 +32,7 @@ RUN cd /tmp \
 RUN apk add --update --no-cache \
     qt5-qtbase \
     qt5-qttools-dev \
-  && rm -rf /tmp/* /var/cache/apk/*
+  && rm -rf /tmp/*
 
 ARG QBITTORRENT_VERSION
 RUN cd /tmp \
@@ -44,7 +44,7 @@ RUN cd /tmp \
   && ls -al /usr/local/bin/ \
   && qbittorrent-nox --help
 
-FROM alpine:3.14
+FROM alpine:3.15
 
 COPY --from=yasu / /
 COPY --from=builder /usr/local/lib/libtorrent-rasterbar.so.10.0.0 /usr/lib/libtorrent-rasterbar.so.10
@@ -57,10 +57,9 @@ RUN apk --update --no-cache add \
     qt5-qtbase \
     shadow \
     tzdata \
-    unrar \
     unzip \
     zlib \
-  && rm -rf /tmp/* /var/cache/apk/*
+  && rm -rf /tmp/*
 
 ENV QBITTORRENT_HOME="/home/qbittorrent" \
   TZ="UTC" \
