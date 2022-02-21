@@ -38,6 +38,7 @@ ___
 ## Features
 
 * Run as non-root user
+* Multi-platform image
 * Latest [qBittorrent](https://github.com/qbittorrent/qBittorrent) / [libtorrent-rasterbar](https://github.com/arvidn/libtorrent) release compiled from source
 * WAN IP address automatically resolved for reporting to the tracker
 * Finished torrents automatically saved to `/data/torrents`
@@ -66,6 +67,19 @@ docker buildx bake image-all
 |--------------------------------------------------------------------------------------------------|---------------------------------|
 | [Docker Hub](https://hub.docker.com/r/crazymax/qbittorrent/)                                            | `crazymax/qbittorrent`                 |
 | [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/qbittorrent)  | `ghcr.io/crazy-max/qbittorrent`        |
+
+Following platforms for this image are available:
+
+```
+$ docker run --rm mplatform/mquery crazymax/qbittorrent:latest
+Image: crazymax/qbittorrent:latest
+ * Manifest List: Yes
+ * Supported platforms:
+   - linux/amd64
+   - linux/arm/v6
+   - linux/arm/v7
+   - linux/arm64
+```
 
 ## Environment variables
 
