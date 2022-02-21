@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.4.1-r0 (2022/02/21)
+
+* qBittorrent 4.4.1 and libtorrent-rasterbar 2.0.5 (#42)
+* Multi-platform image support (#42)
+* Alpine Linux 3.15 (#41)
+
 ## 4.3.8-r0 (2021/09/10)
 
 * qBittorrent 4.3.8
