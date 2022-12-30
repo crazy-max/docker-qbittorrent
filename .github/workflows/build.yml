@@ -1,10 +1,12 @@
 name: build
 
 concurrency:
-  group: build-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
+  schedule:
+    - cron: '0 8 */6 * *' # every 6 days to keep cache
   push:
     branches:
       - 'master'
@@ -13,8 +15,6 @@ on:
     paths-ignore:
       - '**.md'
   pull_request:
-    branches:
-      - 'master'
     paths-ignore:
       - '**.md'
 
@@ -75,6 +75,9 @@ jobs:
             ${{ steps.meta.outputs.bake-file }}
           targets: image-all
           push: ${{ github.event_name != 'pull_request' }}
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
       -
         name: Check manifest
         if: github.event_name != 'pull_request'

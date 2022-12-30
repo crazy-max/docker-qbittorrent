@@ -1,9 +1,10 @@
 ARG QBITTORRENT_VERSION=4.5.0
 ARG LIBTORRENT_VERSION=2.0.8
 ARG XX_VERSION=1.1.2
+ARG ALPINE_VERSION=3.17
 
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
-FROM --platform=$BUILDPLATFORM alpine:3.15 AS base
+FROM --platform=$BUILDPLATFORM alpine:${ALPINE_VERSION} AS base
 COPY --from=xx / /
 RUN apk --update --no-cache add git
 
@@ -29,7 +30,6 @@ RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
     -DCMAKE_SYSROOT="$(xx-info sysroot)" \
     -DCMAKE_CXX_FLAGS="-w -s" \
     -DCMAKE_BUILD_TYPE="Release" \
-    -DCMAKE_CXX_STANDARD=17 \
     -DCMAKE_INSTALL_LIBDIR="lib" \
     -DCMAKE_INSTALL_PREFIX="$(xx-info sysroot)usr/local" \
   && cmake --build build \
@@ -37,37 +37,36 @@ RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
 
 COPY --from=qbittorrent-src /src /src/qbittorrent
 WORKDIR /src/qbittorrent
-RUN xx-apk --no-cache --no-scripts add icu-dev libexecinfo-dev qt5-qtbase-dev qt5-qttools-dev qt5-qtsvg-dev
+RUN xx-apk --no-cache --no-scripts add boost-dev icu-dev qt6-qtbase-dev qt6-qttools-dev qt6-qtsvg-dev samurai
 RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
-  && cmake -Wno-dev -G Ninja -B build $(xx-clang --print-cmake-defines) \
+  && cmake -Wno-dev -G Ninja -B build-nox $(xx-clang --print-cmake-defines) \
     -DGUI=OFF \
     -DCMAKE_SYSROOT="$(xx-info sysroot)" \
     -DCMAKE_CXX_FLAGS="-w -s" \
     -DCMAKE_BUILD_TYPE="Release" \
-    -DCMAKE_CXX_STANDARD=17 \
-    -DCMAKE_CXX_STANDARD_LIBRARIES="$(xx-info sysroot)usr/lib/libexecinfo.so.1" \
     -DCMAKE_INSTALL_PREFIX="$(xx-info sysroot)usr/local" \
-  && cmake --build build \
-  && cmake --install build
+    -DQT6=ON \
+  && cmake --build build-nox \
+  && cmake --install build-nox
 
 RUN mkdir -p /out/usr/local/bin /out/usr/local/lib \
   && cp $(xx-info sysroot)usr/local/lib/libtorrent-rasterbar.so* /out/usr/local/lib/ \
   && cp $(xx-info sysroot)usr/local/bin/qbittorrent-nox /out/usr/local/bin/
 
 FROM crazymax/yasu:latest AS yasu
-FROM alpine:3.15
+FROM alpine:${ALPINE_VERSION}
 
 COPY --from=yasu / /
 COPY --from=build /out /
 
 RUN apk --update --no-cache add \
     bind-tools \
+    boost \
     curl \
     icu \
-    libexecinfo \
     openssl \
-    qt5-qtbase \
-    qt5-qtsvg \
+    qt6-qtbase \
+    qt6-qtsvg \
     shadow \
     tzdata \
     unzip \
