@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.5.0-r0 (2022/12/30)
+
+* qBittorrent 4.5.0 and libtorrent-rasterbar 2.0.8 (#50)
+* Alpine Linux 3.17 (#52)
+
 ## 4.4.3.1-r0 (2022/06/05)
 
 * qBittorrent 4.4.3.1 and libtorrent-rasterbar 2.0.6 (#49)
