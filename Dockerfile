@@ -1,6 +1,6 @@
-ARG QBITTORRENT_VERSION=4.4.3.1
-ARG LIBTORRENT_VERSION=2.0.6
-ARG XX_VERSION=1.1.1
+ARG QBITTORRENT_VERSION=4.5.0
+ARG LIBTORRENT_VERSION=2.0.8
+ARG XX_VERSION=1.1.2
 
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
 FROM --platform=$BUILDPLATFORM alpine:3.15 AS base
@@ -32,7 +32,7 @@ RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
     -DCMAKE_CXX_STANDARD=17 \
     -DCMAKE_INSTALL_LIBDIR="lib" \
     -DCMAKE_INSTALL_PREFIX="$(xx-info sysroot)usr/local" \
-  && cmake --build build --verbose \
+  && cmake --build build \
   && cmake --install build
 
 COPY --from=qbittorrent-src /src /src/qbittorrent
@@ -47,7 +47,7 @@ RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
     -DCMAKE_CXX_STANDARD=17 \
     -DCMAKE_CXX_STANDARD_LIBRARIES="$(xx-info sysroot)usr/lib/libexecinfo.so.1" \
     -DCMAKE_INSTALL_PREFIX="$(xx-info sysroot)usr/local" \
-  && cmake --build build --verbose \
+  && cmake --build build \
   && cmake --install build
 
 RUN mkdir -p /out/usr/local/bin /out/usr/local/lib \
