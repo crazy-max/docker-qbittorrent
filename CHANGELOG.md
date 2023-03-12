@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.5.2-r0 (2023/03/12)
+
+* qBittorrent 4.5.2 (#53)
+
 ## 4.5.0-r0 (2022/12/30)
 
 * qBittorrent 4.5.0 and libtorrent-rasterbar 2.0.8 (#50)
