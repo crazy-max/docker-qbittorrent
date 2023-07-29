@@ -1,0 +1,40 @@
+services:
+  qbittorrent:
+    image: crazymax/qbittorrent
+    container_name: qbittorrent
+    ports:
+      - target: 6881
+        published: 6881
+        protocol: tcp
+      - target: 6881
+        published: 6881
+        protocol: udp
+      - target: 8080
+        published: 8080
+        protocol: tcp
+    volumes:
+      - "qbittorrent-data:/data"
+      - "qbittorrent-logs:/var/log/qbittorrent"
+    environment:
+      - "TZ=Europe/Paris"
+      - "ALT_WEBUI=false"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+    restart: always
+
+  logs:
+    image: bash
+    container_name: qbittorrent_logs
+    command: bash -c 'tail -f /log/*.log'
+    depends_on:
+      - qbittorrent
+    volumes:
+      - "qbittorrent-logs:/log"
+    restart: always
+
+volumes:
+  qbittorrent-data:
+  qbittorrent-logs:

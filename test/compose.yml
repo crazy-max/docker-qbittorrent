@@ -1,9 +1,9 @@
-version: "3.2"
-
 services:
   qbittorrent:
-    image: crazymax/qbittorrent
-    container_name: qbittorrent
+    image: ${QBITTORRENT_IMAGE:-crazymax/qbittorrent}
+    container_name: ${QBITTORRENT_CONTAINER:-qbittorrent}
+    networks:
+      - qbittorrent
     ports:
       - target: 6881
         published: 6881
@@ -31,6 +31,8 @@ services:
     image: bash
     container_name: qbittorrent_logs
     command: bash -c 'tail -f /log/*.log'
+    networks:
+      - qbittorrent
     depends_on:
       - qbittorrent
     volumes:
@@ -40,3 +42,7 @@ services:
 volumes:
   qbittorrent-data:
   qbittorrent-logs:
+
+networks:
+  qbittorrent:
+    name: qbittorrent
