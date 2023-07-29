@@ -47,7 +47,7 @@ ___
 * Handle [watch directory](#watch-torrents) from `/data/watch`
 * Ability to use an [alternative WebUI](https://github.com/qbittorrent/qBittorrent/wiki/Alternate-WebUI-usage) in `/data/webui`
 * Healthcheck through [qBittorrent API](https://github.com/qbittorrent/qBittorrent/wiki/Web-API-Documentation)
-* Logs managed through a [dedicated container](examples/traefik/docker-compose.yml)
+* Logs managed through a [dedicated container](examples/traefik/compose.yml)
 * [Traefik](https://github.com/containous/traefik-library-image) as reverse proxy and creation/renewal of Let's Encrypt certificates (see [this template](examples/traefik))
 
 ## Build locally
@@ -109,11 +109,11 @@ Image: crazymax/qbittorrent:latest
 ### Docker Compose
 
 Docker compose is the recommended way to run this image. You can use the following
-[docker compose template](examples/compose/docker-compose.yml), then run the container:
+[compose template](examples/compose/compose.yml), then run the container:
 
 ```bash
-$ docker-compose up -d
-$ docker-compose logs -f
+$ docker compose up -d
+$ docker compose logs -f
 ```
 
 ### Command line
@@ -136,8 +136,8 @@ $ docker run -d --name qbittorrent \
 Recreate the container whenever I push an update:
 
 ```bash
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 ## Notes
@@ -148,7 +148,7 @@ docker-compose up -d
 this image using curl.
 
 ```
-$ docker-compose exec qbittorrent curl --fail http://127.0.0.1:8080/api/v2/app/version
+$ docker compose exec qbittorrent curl --fail http://127.0.0.1:8080/api/v2/app/version
 v4.1.8
 ```
 
@@ -157,7 +157,7 @@ v4.1.8
 You can change the default username `admin` and password `adminadmin` through the API or WebUI.
 
 ```shell
-docker-compose exec qbittorrent curl --fail -X POST \
+docker compose exec qbittorrent curl --fail -X POST \
   -d 'json={"web_ui_username":"myuser","web_ui_password":"mypassword"}' \
   http://127.0.0.1:8080/api/v2/app/setPreferences
 ```
@@ -171,7 +171,7 @@ You can configure the monitored folders on the qBittorrent interface:
 Or through the API:
 
 ```shell
-docker-compose exec qbittorrent curl --fail -X POST \
+docker compose exec qbittorrent curl --fail -X POST \
   -d 'json={"scan_dirs":{"/data/watch": 1}}' \
   http://127.0.0.1:8080/api/v2/app/setPreferences
 ```
