@@ -11,16 +11,12 @@ on:
     paths-ignore:
       - '**.md'
   pull_request:
-    branches:
-      - 'master'
     paths-ignore:
       - '**.md'
 
 env:
   BUILD_TAG: qbittorrent:test
   CONTAINER_NAME: qbittorrent
-  RUNNING_TIMEOUT: 120
-  RUNNING_LOG_CHECK: "WebUI will be started shortly"
 
 jobs:
   test:
@@ -48,27 +44,12 @@ jobs:
           docker rm -f ${CONTAINER_NAME} > /dev/null 2>&1 || true
           docker run -d --name ${CONTAINER_NAME} ${BUILD_TAG}
       -
-        name: Test run
-        run: |
-          SECONDS=0
-          TIMEOUT=$((SECONDS + ${RUNNING_TIMEOUT}))
-          while read LOGLINE; do
-            echo ${LOGLINE}
-            if [[ ${LOGLINE} == *"${RUNNING_LOG_CHECK}"* ]]; then
-              echo "🎉 Container up!"
-              break
-            fi
-            if [[ $SECONDS -gt ${TIMEOUT} ]]; then
-              >&2 echo "❌ Failed to run ${CONTAINER_NAME} container"
-              exit 1
-            fi
-          done < <(docker logs -f ${CONTAINER_NAME} 2>&1)
-
-          CONTAINER_STATUS=$(docker container inspect --format "{{.State.Status}}" ${CONTAINER_NAME})
-          if [[ ${CONTAINER_STATUS} != "running" ]]; then
-            >&2 echo "❌ Container ${CONTAINER_NAME} returned status '$CONTAINER_STATUS'"
-            exit 1
-          fi
+        name: Check container logs
+        uses: crazy-max/.github/.github/actions/container-logs-check@main
+        with:
+          container_name: ${{ env.CONTAINER_NAME }}
+          log_check: "WebUI will be started shortly"
+          timeout: 120
       -
         name: Logs
         if: always()
