@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.6.2-r0 (2023/12/30)
+
+* qBittorrent 4.6.2 and libtorrent-rasterbar 2.0.9 (#68)
+* Alpine Linux 3.18 (#67)
+
 ## 4.5.2-r0 (2023/03/12)
 
 * qBittorrent 4.5.2 (#53)
