@@ -2,8 +2,8 @@
 
 ARG QBITTORRENT_VERSION=4.6.4
 ARG LIBTORRENT_VERSION=2.0.10
+ARG ALPINE_VERSION=3.19
 ARG XX_VERSION=1.3.0
-ARG ALPINE_VERSION=3.18
 
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
 FROM --platform=$BUILDPLATFORM alpine:${ALPINE_VERSION} AS base
@@ -39,7 +39,7 @@ RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
 
 COPY --from=qbittorrent-src /src /src/qbittorrent
 WORKDIR /src/qbittorrent
-RUN xx-apk --no-cache --no-scripts add boost-dev icu-dev qt6-qtbase-dev qt6-qttools-dev qt6-qtsvg-dev samurai
+RUN xx-apk --no-cache --no-scripts add boost-dev icu-dev libproxy qt6-qtbase-dev qt6-qttools-dev qt6-qtsvg-dev samurai
 RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
   && cmake -Wno-dev -G Ninja -B build-nox $(xx-clang --print-cmake-defines) \
     -DGUI=OFF \
