@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.6.4-r0 (2024/05/03)
+
+* qBittorrent 4.6.4 and libtorrent-rasterbar 2.0.10 (#74)
+
 ## 4.6.2-r0 (2023/12/30)
 
 * qBittorrent 4.6.2 and libtorrent-rasterbar 2.0.9 (#68)
