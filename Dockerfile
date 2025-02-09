@@ -27,8 +27,7 @@ COPY --from=libtorrent-src /src /src/libtorrent
 WORKDIR /src/libtorrent
 ARG TARGETPLATFORM
 RUN xx-apk --no-cache --no-scripts add gcc g++ boost-dev cppunit-dev ncurses-dev openssl-dev python3-dev py3-numpy-dev zlib-dev
-RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
-  && cmake -Wno-dev -G Ninja -B build $(xx-clang --print-cmake-defines) \
+RUN cmake -Wno-dev -G Ninja -B build $(xx-clang --print-cmake-defines) \
     -DCMAKE_SYSROOT="$(xx-info sysroot)" \
     -DCMAKE_CXX_FLAGS="-w -s" \
     -DCMAKE_BUILD_TYPE="Release" \
@@ -40,8 +39,7 @@ RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
 COPY --from=qbittorrent-src /src /src/qbittorrent
 WORKDIR /src/qbittorrent
 RUN xx-apk --no-cache --no-scripts add boost-dev icu-dev qt6-qtbase-dev qt6-qttools-dev qt6-qtsvg-dev samurai
-RUN export QEMU_LD_PREFIX=$(xx-info sysroot) \
-  && cmake -Wno-dev -G Ninja -B build-nox $(xx-clang --print-cmake-defines) \
+RUN cmake -Wno-dev -G Ninja -B build-nox $(xx-clang --print-cmake-defines) \
     -DGUI=OFF \
     -DCMAKE_SYSROOT="$(xx-info sysroot)" \
     -DCMAKE_CXX_FLAGS="-w -s" \

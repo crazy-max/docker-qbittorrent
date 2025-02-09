@@ -74,7 +74,7 @@ jobs:
           retention-days: 1
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     permissions:
       # same as global permissions
       contents: read
@@ -102,9 +102,6 @@ jobs:
         with:
           name: bake-meta
           path: /tmp
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
