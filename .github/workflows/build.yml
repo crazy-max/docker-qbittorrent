@@ -63,6 +63,7 @@ jobs:
         org.opencontainers.image.title=qBittorrent
         org.opencontainers.image.description=Cross-platform free and open-source BitTorrent client
         org.opencontainers.image.vendor=CrazyMax
+      login-registry: ${{ matrix.login-registry }}
       login-username: ${{ matrix.login-username }}
     secrets:
       login-password: ${{ secrets[matrix.login-secret-key] }}
