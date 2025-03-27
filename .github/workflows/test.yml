@@ -41,6 +41,8 @@ jobs:
         with:
           source: .
           targets: image-local
+          set: |
+            *.cache-from=type=gha,scope=build-linux-amd64
         env:
           DEFAULT_TAG: ${{ env.BUILD_TAG }}
       -
