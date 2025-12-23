@@ -64,10 +64,10 @@ docker buildx bake image-all
 
 ## Image
 
-| Registry                                                                                         | Image                           |
-|--------------------------------------------------------------------------------------------------|---------------------------------|
-| [Docker Hub](https://hub.docker.com/r/crazymax/qbittorrent/)                                            | `crazymax/qbittorrent`                 |
-| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/qbittorrent)  | `ghcr.io/crazy-max/qbittorrent`        |
+| Registry                                                                                               | Image                           |
+|--------------------------------------------------------------------------------------------------------|---------------------------------|
+| [Docker Hub](https://hub.docker.com/r/crazymax/qbittorrent/)                                           | `crazymax/qbittorrent`          |
+| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/qbittorrent) | `ghcr.io/crazy-max/qbittorrent` |
 
 Following platforms for this image are available:
 
@@ -76,8 +76,6 @@ $ docker buildx imagetools inspect crazymax/qbittorrent --format "{{json .Manife
   jq -r '.manifests[] | select(.platform.os != null and .platform.os != "unknown") | .platform | "\(.os)/\(.architecture)\(if .variant then "/" + .variant else "" end)"'
 
 linux/amd64
-linux/arm/v6
-linux/arm/v7
 linux/arm64
 ```
 
