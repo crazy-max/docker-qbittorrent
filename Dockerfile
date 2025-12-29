@@ -2,8 +2,9 @@
 
 ARG QBITTORRENT_VERSION=5.0.3
 ARG LIBTORRENT_VERSION=2.0.11
-ARG XX_VERSION=1.6.1
-ARG ALPINE_VERSION=3.21
+
+ARG ALPINE_VERSION=3.22
+ARG XX_VERSION=1.9.0
 
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
 FROM --platform=$BUILDPLATFORM alpine:${ALPINE_VERSION} AS base
@@ -46,7 +47,7 @@ EOT
 
 COPY --from=qbittorrent-src /src /src/qbittorrent
 WORKDIR /src/qbittorrent
-RUN xx-apk --no-cache --no-scripts add boost-dev icu-dev qt6-qtbase-dev qt6-qttools-dev qt6-qtsvg-dev samurai
+RUN xx-apk --no-cache --no-scripts add boost-dev icu-dev qt6-qtbase-dev qt6-qtbase-private-dev qt6-qttools-dev qt6-qtsvg-dev samurai
 RUN <<EOT
   set -ex
   ln -s $(xx-info sysroot)usr/lib/libproxy/libpxbackend*.so $(xx-info sysroot)usr/lib/
