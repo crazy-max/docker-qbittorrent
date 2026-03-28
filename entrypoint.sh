@@ -104,4 +104,4 @@ chown qbittorrent:qbittorrent /data \
   /data/webui
 chown -R qbittorrent:qbittorrent "${QBITTORRENT_HOME}" /var/log/qbittorrent
 
-exec yasu qbittorrent:qbittorrent "$@"
+exec gosu qbittorrent:qbittorrent "$@"

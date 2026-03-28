@@ -6,7 +6,9 @@ ARG LIBTORRENT_VERSION=2.0.11
 ARG ALPINE_VERSION=3.22
 ARG XX_VERSION=1.9.0
 
+FROM tianon/gosu:latest AS gosu
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
+
 FROM --platform=$BUILDPLATFORM alpine:${ALPINE_VERSION} AS base
 COPY --from=xx / /
 RUN apk --update --no-cache add git
@@ -67,11 +69,8 @@ RUN <<EOT
   cp $(xx-info sysroot)usr/local/bin/qbittorrent-nox /out/usr/local/bin/
 EOT
 
-FROM crazymax/yasu:latest AS yasu
 FROM alpine:${ALPINE_VERSION}
-
-COPY --from=yasu / /
-
+COPY --from=gosu /gosu /usr/local/bin/
 RUN apk --update --no-cache add \
     bind-tools \
     boost \
