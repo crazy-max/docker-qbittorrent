@@ -85,6 +85,7 @@ linux/arm64
 * `PUID`: qBittorrent user id (default `1000`)
 * `PGID`: qBittorrent group id (default `1000`)
 * `WAN_IP`: Public IP address reported to the tracker (default auto resolved with `dig +short myip.opendns.com @resolver1.opendns.com`)
+* `DHT_PORT`: DHT port to be used (default `6881`)
 * `WEBUI_PORT`: WebUI port to be used (default `8080`)
 * `ALT_WEBUI`: Enable alternative WebUI located in `/data/webui` (default `false`)
 
