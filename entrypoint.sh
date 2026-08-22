@@ -13,6 +13,7 @@ if [ -n "${PUID}" ] && [ "${PUID}" != "$(id -u qbittorrent)" ]; then
   sed -i -e "s/^qbittorrent:\([^:]*\):[0-9]*:\([0-9]*\)/qbittorrent:\1:${PUID}:\2/" /etc/passwd
 fi
 
+DHT_PORT=${DHT_PORT:-6881}
 WEBUI_PORT=${WEBUI_PORT:-8080}
 ALT_WEBUI=${ALT_WEBUI:-false}
 if [ "${ALT_WEBUI}" != "true" ]; then
@@ -55,7 +56,8 @@ Accepted=true
 Bittorrent\AddTrackers=false
 Connection\InetAddress=${WAN_IP}
 Connection\InterfaceListenIPv6=false
-Connection\PortRangeMin=6881
+Connection\PortRangeMin=${DHT_PORT}
+Connection\PortRangeMax=${DHT_PORT}
 Connection\UseUPnP=false
 Downloads\PreAllocation=true
 Downloads\SavePath=/data/downloads
@@ -81,6 +83,8 @@ sed -i "s!FileLogger\\\Enabled=.*!FileLogger\\\Enabled=true!g" /data/config/qBit
 sed -i "s!FileLogger\\\Path=.*!FileLogger\\\Path=/var/log/qbittorrent!g" /data/config/qBittorrent.conf
 sed -i "s!Connection\\\InetAddress=.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
 sed -i "s!Connection\\\InterfaceListenIPv6=.*!Connection\\\InterfaceListenIPv6=false!g" /data/config/qBittorrent.conf
+sed -i "s!Connection\\\PortRangeMin=.*!Connection\\\PortRangeMin=${DHT_PORT}!g" /data/config/qBittorrent.conf
+sed -i "s!Connection\\\PortRangeMax=.*!Connection\\\PortRangeMax=${DHT_PORT}!g" /data/config/qBittorrent.conf
 sed -i "s!Connection\\\UseUPnP=.*!Connection\\\UseUPnP=false!g" /data/config/qBittorrent.conf
 sed -i "s!Connection\\\InetAddress=.*!Connection\\\InetAddress=${WAN_IP}!g" /data/config/qBittorrent.conf
 sed -i "s!Downloads\\\SavePath=.*!Downloads\\\SavePath=/data/downloads!g" /data/config/qBittorrent.conf
