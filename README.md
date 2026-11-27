@@ -85,6 +85,7 @@ linux/arm64
 * `PUID`: qBittorrent user id (default `1000`)
 * `PGID`: qBittorrent group id (default `1000`)
 * `WAN_IP`: Public IP address reported to the tracker (default auto resolved with `dig +short myip.opendns.com @resolver1.opendns.com`)
+* `DHT_PORT`: BitTorrent peer and DHT listening port. A new config defaults to `6881`. Leave this unset to keep the saved port.
 * `WEBUI_PORT`: WebUI port to be used (default `8080`)
 * `ALT_WEBUI`: Enable alternative WebUI located in `/data/webui` (default `false`)
 
@@ -92,13 +93,20 @@ linux/arm64
 
 * `/data`: qBittorrent config, downloads, temp, torrents, watch, webui...
 
-> :warning: Note that the volumes should be owned by the user/group with the specified `PUID` and `PGID`.
-> If you don't give the volume correct permissions, the container may not start.
+> [!WARNING]
+> Note that the volumes should be owned by the user/group with the specified
+> `PUID` and `PGID`. If you don't give the volume correct permissions, the
+> container may not start.
 
 ## Ports
 
-* `6881`: DHT port
+* `6881/tcp` and `6881/udp`: Default BitTorrent peer and DHT listening port
 * `8080`: qBittorrent HTTP port
+
+> [!IMPORTANT]
+> If you set `DHT_PORT`, update both the TCP and UDP mappings to target that
+> container port. For example, with `DHT_PORT=51413`, publish `51413:51413/tcp`
+> and `51413:51413/udp`.
 
 ## Usage
 

@@ -61,14 +61,20 @@ jobs:
           log_check: "WebUI will be started shortly"
           timeout: 120
       -
-        name: Check WebUI after recreating the container
+        name: Check settings
         run: |
+          set -x
           docker exec "${CONTAINER_NAME}" curl --fail --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8080/api/v2/app/version
+          docker exec "${CONTAINER_NAME}" curl --fail --silent --show-error http://127.0.0.1:8080/api/v2/app/preferences | jq -e '.listen_port == 6881'
           docker exec "${CONTAINER_NAME}" curl --fail --data 'json={"web_ui_session_timeout":7200}' http://127.0.0.1:8080/api/v2/app/setPreferences
           docker stop "${CONTAINER_NAME}"
-          docker run -d --name "${CONTAINER_NAME}-recreated" --volumes-from "${CONTAINER_NAME}" -e WEBUI_PORT=8081 "${BUILD_TAG}"
+          docker run -d --name "${CONTAINER_NAME}-recreated" --volumes-from "${CONTAINER_NAME}" -e WEBUI_PORT=8081 -e DHT_PORT=51413 "${BUILD_TAG}"
           docker exec "${CONTAINER_NAME}-recreated" curl --fail --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8081/api/v2/app/version
+          docker exec "${CONTAINER_NAME}-recreated" curl --fail --silent --show-error http://127.0.0.1:8081/api/v2/app/preferences | jq -e '.listen_port == 51413'
           docker exec "${CONTAINER_NAME}-recreated" grep -qx 'SessionTimeout=7200' /data/config/qBittorrent.conf
+          docker stop "${CONTAINER_NAME}-recreated"
+          docker start "${CONTAINER_NAME}"
+          docker exec "${CONTAINER_NAME}" curl --fail --silent --show-error --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8080/api/v2/app/preferences | jq -e '.listen_port == 51413'
       -
         name: Logs
         if: always()
