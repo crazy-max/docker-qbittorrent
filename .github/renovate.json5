@@ -1,0 +1,61 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "helpers:githubDigestChangelogs"
+  ],
+  "enabledManagers": [
+    "github-actions",
+    "dockerfile",
+    "custom.regex"
+  ],
+  "prHourlyLimit": 0,
+  "minimumReleaseAge": "2 days",
+  "internalChecksFilter": "strict",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "commitMessageSuffix": ""
+  },
+  "labels": ["kind/dependencies", "bot"],
+  "semanticCommits": "disabled",
+  "commitMessagePrefix": "deps{{#if isVulnerabilityAlert}}(security){{/if}}:",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\r?\\nARG [A-Z]+_VERSION=(?<currentValue>\\S+)\\r?\\nARG [A-Z]+_COMMIT=(?<currentDigest>[a-f0-9]{40})"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["qbittorrent/qBittorrent", "arvidn/libtorrent"],
+      "groupName": "qBittorrent and libtorrent",
+      "separateMajorMinor": false
+    },
+    {
+      "matchPackageNames": ["qbittorrent/qBittorrent"],
+      "extractVersion": "^release-(?<version>\\d+\\.\\d+\\.\\d+)$"
+    },
+    {
+      "matchPackageNames": ["arvidn/libtorrent"],
+      "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
+    },
+    {
+      "matchFileNames": ["Dockerfile"],
+      "commitMessagePrefix": "deps(dockerfile{{#if isVulnerabilityAlert}},security{{/if}}):"
+    },
+    {
+      "matchFileNames": [".github/workflows/**"],
+      "commitMessagePrefix": "deps(ci{{#if isVulnerabilityAlert}},security{{/if}}):"
+    },
+    {
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "commitMessageAction": "bump",
+      "commitMessageTopic": "{{{depName}}}",
+      "commitMessageExtra": "from {{{replace '^v' '' currentValue}}} to {{{replace '^v' '' newValue}}}"
+    }
+  ]
+}

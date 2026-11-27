@@ -1,9 +1,15 @@
 # syntax=docker/dockerfile:1
 
+# renovate: datasource=github-tags depName=qbittorrent/qBittorrent
 ARG QBITTORRENT_VERSION=5.1.4
+ARG QBITTORRENT_COMMIT=33e5e772200b5e2f9d23af8870ce7436ec216faa
+# renovate: datasource=github-tags depName=arvidn/libtorrent
 ARG LIBTORRENT_VERSION=2.0.11
+ARG LIBTORRENT_COMMIT=9d7443f467147d1784fb7516d2a882db1abb5a8b
 
+# renovate: datasource=docker depName=alpine versioning=docker
 ARG ALPINE_VERSION=3.22
+# renovate: datasource=docker depName=tonistiigi/xx versioning=docker
 ARG XX_VERSION=1.9.0
 
 FROM tianon/gosu:latest AS gosu
@@ -15,13 +21,17 @@ RUN apk --update --no-cache add git
 
 FROM base AS libtorrent-src
 ARG LIBTORRENT_VERSION
+ARG LIBTORRENT_COMMIT
 WORKDIR /src
-RUN git clone --branch v${LIBTORRENT_VERSION} --depth 1 --recurse-submodules https://github.com/arvidn/libtorrent.git .
+RUN git clone --branch v${LIBTORRENT_VERSION} --depth 1 --recurse-submodules https://github.com/arvidn/libtorrent.git . \
+  && test "$(git rev-parse HEAD)" = "${LIBTORRENT_COMMIT}"
 
 FROM base AS qbittorrent-src
 ARG QBITTORRENT_VERSION
+ARG QBITTORRENT_COMMIT
 WORKDIR /src
-RUN git clone --branch release-${QBITTORRENT_VERSION} --shallow-submodules --recurse-submodules https://github.com/qbittorrent/qBittorrent.git .
+RUN git clone --branch release-${QBITTORRENT_VERSION} --shallow-submodules --recurse-submodules https://github.com/qbittorrent/qBittorrent.git . \
+  && test "$(git rev-parse HEAD)" = "${QBITTORRENT_COMMIT}"
 
 FROM base AS build
 RUN apk --update --no-cache add binutils clang cmake libtool linux-headers ninja perl pkgconf tree
