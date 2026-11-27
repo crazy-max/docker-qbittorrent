@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1
 
 # renovate: datasource=github-tags depName=qbittorrent/qBittorrent
-ARG QBITTORRENT_VERSION=5.1.4
-ARG QBITTORRENT_COMMIT=33e5e772200b5e2f9d23af8870ce7436ec216faa
+ARG QBITTORRENT_VERSION=5.3.1
+ARG QBITTORRENT_COMMIT=f3cfbccd42dc07e7aa174b525f6d6dfd2d0595a0
 # renovate: datasource=github-tags depName=arvidn/libtorrent
-ARG LIBTORRENT_VERSION=2.0.11
-ARG LIBTORRENT_COMMIT=9d7443f467147d1784fb7516d2a882db1abb5a8b
+ARG LIBTORRENT_VERSION=2.1.3
+ARG LIBTORRENT_COMMIT=87b77c039e98200e0e7625ddc5bdc55b44c7f2c1
 
 # renovate: datasource=docker depName=alpine versioning=docker
 ARG ALPINE_VERSION=3.22
