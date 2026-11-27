@@ -10,7 +10,7 @@ ARG LIBTORRENT_COMMIT=9d7443f467147d1784fb7516d2a882db1abb5a8b
 # renovate: datasource=docker depName=alpine versioning=docker
 ARG ALPINE_VERSION=3.22
 # renovate: datasource=docker depName=tonistiigi/xx versioning=docker
-ARG XX_VERSION=1.9.0
+ARG XX_VERSION=1.10.0
 
 FROM tianon/gosu:latest AS gosu
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
