@@ -8,7 +8,7 @@ ARG LIBTORRENT_VERSION=2.0.11
 ARG LIBTORRENT_COMMIT=9d7443f467147d1784fb7516d2a882db1abb5a8b
 
 # renovate: datasource=docker depName=alpine versioning=docker
-ARG ALPINE_VERSION=3.22
+ARG ALPINE_VERSION=3.24
 # renovate: datasource=docker depName=tonistiigi/xx versioning=docker
 ARG XX_VERSION=1.9.0
 
