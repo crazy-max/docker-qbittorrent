@@ -61,9 +61,19 @@ jobs:
           log_check: "WebUI will be started shortly"
           timeout: 120
       -
+        name: Check WebUI after recreating the container
+        run: |
+          docker exec "${CONTAINER_NAME}" curl --fail --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8080/api/v2/app/version
+          docker exec "${CONTAINER_NAME}" curl --fail --data 'json={"web_ui_session_timeout":7200}' http://127.0.0.1:8080/api/v2/app/setPreferences
+          docker stop "${CONTAINER_NAME}"
+          docker run -d --name "${CONTAINER_NAME}-recreated" --volumes-from "${CONTAINER_NAME}" -e WEBUI_PORT=8081 "${BUILD_TAG}"
+          docker exec "${CONTAINER_NAME}-recreated" curl --fail --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8081/api/v2/app/version
+          docker exec "${CONTAINER_NAME}-recreated" grep -qx 'SessionTimeout=7200' /data/config/qBittorrent.conf
+      -
         name: Logs
         if: always()
         run: |
+          docker logs "${CONTAINER_NAME}-recreated" || true
           docker compose logs
         working-directory: test
         env:

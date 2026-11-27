@@ -89,6 +89,7 @@ RUN apk --update --no-cache add \
     openssl \
     qt6-qtbase \
     qt6-qtsvg \
+    qt6-qttranslations \
     shadow \
     tzdata \
     unzip \
