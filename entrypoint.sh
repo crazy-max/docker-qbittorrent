@@ -1,5 +1,13 @@
 #!/bin/sh
 
+if [ -n "${DHT_PORT}" ]; then
+  if ! { [ "${DHT_PORT}" -ge 1 ] && [ "${DHT_PORT}" -le 65535 ]; } 2>/dev/null; then
+    echo "DHT_PORT must be an integer from 1 to 65535" >&2
+    exit 1
+  fi
+  export QBT_TORRENTING_PORT="${DHT_PORT}"
+fi
+
 if [ -z "${WAN_IP}" ]; then
   WAN_IP=$(dig +short myip.opendns.com @resolver1.opendns.com) || WAN_IP=
 fi
